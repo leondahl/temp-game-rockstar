@@ -1,2 +1,2 @@
 # temp-game-rockstar
-Temporary af
+Temporary game storage.
