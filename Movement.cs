@@ -4,27 +4,51 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    //Pointers for the components
     Rigidbody2D playerBody;
+    BoxCollider2D boxColl2D;
     public float playerMovementX;
-    public float playerJumpHeight = 3;
     public bool isJumping;
+    public bool isGrounded;
 	void Start ()
     {
         playerBody = GetComponent<Rigidbody2D>();
+        boxColl2D = GetComponent<BoxCollider2D>();
 	}
-	
-	void FixedUpdate ()
+
+    void FixedUpdate()
     {
+        //Makes the player move around using A and D or the Left Arrow and Right arrow
         playerMovementX = Input.GetAxis("Horizontal");
-        playerBody.transform.position = (playerBody.position + new Vector2(playerMovementX / 2, 0));
-        if (Input.GetKeyDown(KeyCode.Space))
+        playerBody.transform.position = (playerBody.position + new Vector2(playerMovementX / 5.5f, 0));
+        if (Input.GetButtonDown("Jump") && isJumping == false && isGrounded == true)
         {
+            //Checks if the player presses Space and can jump.
             isJumping = true;
-            if (isJumping == true)
+            if (isJumping == true && isGrounded == true)
             {
                 isJumping = false;
-                playerBody.velocity = playerBody.velocity + new Vector2(0, playerJumpHeight * 3);
+                isGrounded = false;
+                playerBody.velocity = playerBody.velocity + new Vector2(0, 7);
+            }
+            else if (isJumping == false || isGrounded == false)
+            {
+                print("Fail");
             }
         }
-	}
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Checks if the player is on the ground or not
+        if (boxColl2D == collision.collider.CompareTag("Ground"))
+        {
+            isGrounded = true;
+            Debug.Log("Collision is working as intended.");
+        }
+        else
+        {
+            isGrounded = false;
+            Debug.Log("Something is wrong here.");
+        }
+    }
 }
