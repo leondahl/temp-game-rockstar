@@ -1,0 +1,6 @@
+1. Create a gameobject to spawn the clouds and attach the script "CloudSpawner" and place it at the end of the level.
+2. create a prefab of the cloud texture and put the prefab into the cloudspawners "Cloud".
+3. Attach the script "CloudBehaviour" to your cloud prefab.
+4. Attach a BoxCollider2d to the cloud and set it on onTrigger.
+5. create an object outside the screen where you start at the left and make it as tall as the screen.
+6. give the new it a boxcollider2d set to onTrigger and a rigidbody2d set with no gravity and lastly give it the script "DeathMachineGood".
