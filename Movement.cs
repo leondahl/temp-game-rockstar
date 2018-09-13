@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    //Pointers for the components
+    //Pointers for the components.
     Rigidbody2D playerBody;
     BoxCollider2D boxColl2D;
     public float playerMovementX;
@@ -21,9 +21,9 @@ public class Movement : MonoBehaviour
         //Makes the player move around using A and D or the Left Arrow and Right arrow
         playerMovementX = Input.GetAxis("Horizontal");
         playerBody.transform.position = (playerBody.position + new Vector2(playerMovementX / 5.5f, 0));
+        //Checks if the player presses Space and can jump. If true, they jump.
         if (Input.GetButtonDown("Jump") && isJumping == false && isGrounded == true)
         {
-            //Checks if the player presses Space and can jump.
             isJumping = true;
             if (isJumping == true && isGrounded == true)
             {
@@ -43,12 +43,10 @@ public class Movement : MonoBehaviour
         if (boxColl2D == collision.collider.CompareTag("Ground"))
         {
             isGrounded = true;
-            Debug.Log("Collision is working as intended.");
         }
         else
         {
             isGrounded = false;
-            Debug.Log("Something is wrong here.");
         }
     }
 }
